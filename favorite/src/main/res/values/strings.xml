@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty">Empty</string>
+    <string name="title_del">Delete all favorite</string>
+    <string name="message">Are you sure delete all favorite?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+</resources>

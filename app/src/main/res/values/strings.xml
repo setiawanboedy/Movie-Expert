@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Movie Expert</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="overview">Overview</string>
+    <string name="rating_d">Rating : %s</string>
+    <string name="search_your_movie">Search Your Movie</string>
+    <string name="empty">Empty</string>
+    <string name="movies">Movies</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="language">Language</string>
+    <string name="search_label">Search Movie</string>
+    <string name="favorite_label">Favorite Movie</string>
+    <string name="detail_label">Detail Movie</string>
+</resources>

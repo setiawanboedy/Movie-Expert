@@ -19,6 +19,9 @@ buildscript {
     ext.nav_version = '2.3.2'
 
     ext.glideVersion = '4.11.0'
+    ext.lottieVersion = '3.6.1'
+
+
     repositories {
         google()
         jcenter()

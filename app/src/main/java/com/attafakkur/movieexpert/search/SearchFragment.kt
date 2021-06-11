@@ -1,5 +1,6 @@
 package com.attafakkur.movieexpert.search
 
+import android.animation.Animator
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
@@ -45,6 +46,19 @@ class SearchFragment : Fragment() {
 
         movieItemClick()
         populateSearchMovie()
+
+        binding.splashLottie.addAnimatorListener(object : Animator.AnimatorListener{
+            override fun onAnimationStart(animation: Animator?) {}
+
+            override fun onAnimationEnd(animation: Animator?) {}
+
+            override fun onAnimationCancel(animation: Animator?) {}
+
+            override fun onAnimationRepeat(animation: Animator?) {}
+
+        })
+
+        showSearchMovie(true)
     }
 
     private fun movieItemClick() {
@@ -60,8 +74,6 @@ class SearchFragment : Fragment() {
     private fun populateSearchMovie() {
         setHasOptionsMenu(true)
         binding.pbSearch.hidePb()
-        showSearchMovie(true)
-
         viewModel.movie.observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
                 when (movie) {
@@ -126,7 +138,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun showSearchMovie(state: Boolean) {
-        binding.yourMovie.isVisible = state
+        binding.splashLottie.isVisible = state
         binding.rvSearch.isVisible = !state
     }
 

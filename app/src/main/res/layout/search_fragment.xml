@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".search.SearchFragment">
 
@@ -18,13 +19,20 @@
         android:layout_gravity="center"
         style="?android:attr/progressBarStyle"/>
 
-    <TextView
-        android:id="@+id/your_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splash_lottie"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:layout_gravity="center"
-        android:textSize="24sp"
-        android:text="@string/search_your_movie"/>
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="searching-user-profile.json"
+        app:lottie_loop="false" />
+
     <TextView
         android:id="@+id/no_movie"
         android:layout_width="wrap_content"

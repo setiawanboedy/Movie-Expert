@@ -1,5 +1,7 @@
 package com.attafakkur.movieexpert.home
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +18,12 @@ import com.attafakkur.core.utils.OnItemClickCallback
 import com.attafakkur.core.utils.hidePb
 import com.attafakkur.core.utils.showPb
 import com.attafakkur.core.utils.snack
+import com.attafakkur.movieexpert.MainActivity
+import com.attafakkur.movieexpert.R
 import com.attafakkur.movieexpert.databinding.HomeFragmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -89,6 +95,14 @@ class HomeFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         homeBinding = null
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.show()
+        val colorDrawable = ColorDrawable(Color.parseColor("#1C1F30"))
+        (activity as MainActivity).supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_nav)
+            ?.visibility = View.VISIBLE
     }
 
 }

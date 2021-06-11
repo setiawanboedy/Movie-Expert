@@ -13,7 +13,8 @@ import com.attafakkur.core.utils.OnItemClickCallback
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class MovieAdapter(private val onItemClickCallback: OnItemClickCallback) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val onItemClickCallback: OnItemClickCallback) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     private var list = ArrayList<Movie>()
 
 

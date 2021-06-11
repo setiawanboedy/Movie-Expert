@@ -15,6 +15,7 @@ import com.attafakkur.core.utils.Constants.IMAGE_URL
 import com.attafakkur.core.utils.hidePb
 import com.attafakkur.core.utils.showPb
 import com.attafakkur.core.utils.snack
+import com.attafakkur.movieexpert.MainActivity
 import com.attafakkur.movieexpert.R
 import com.attafakkur.movieexpert.databinding.DetailkFragmentBinding
 import com.bumptech.glide.Glide
@@ -109,6 +110,11 @@ class DetailFragment : Fragment() {
                 )
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.hide()
     }
 
 }

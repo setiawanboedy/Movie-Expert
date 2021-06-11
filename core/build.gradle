@@ -17,11 +17,25 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "HOSTNAME", "\"api.themoviedb.org\"")
+        buildConfigField("String", "DB", "\"favorite.db\"")
+        buildConfigField("String", "PASSPHRASE", "\"movieexpert\"")
+        buildConfigField("String", "PIN_A", "\"sha256/UGwY2lttaRoHnGd1gpeydmov1LzioQpzYTywtNSJkAU=\"")
+        buildConfigField("String", "PIN_B", "\"sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=\"")
+        buildConfigField("String", "PIN_C", "\"sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=\"")
+        buildConfigField("String", "PIN_D", "\"sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=\"")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,7 +61,13 @@ dependencies {
     api "androidx.room:room-runtime:2.3.0"
     kapt "androidx.room:room-compiler:$room_version"
     androidTestImplementation "androidx.room:room-testing:2.3.0"
+
+
     api "androidx.fragment:fragment-ktx:1.3.4"
     api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
     api "androidx.activity:activity-ktx:1.2.3"
+
+    //sqlcipher
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
 }

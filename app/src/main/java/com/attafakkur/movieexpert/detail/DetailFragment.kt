@@ -29,8 +29,8 @@ class DetailFragment : Fragment() {
     private lateinit var binding: DetailkFragmentBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = DetailkFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -82,8 +82,8 @@ class DetailFragment : Fragment() {
             ratingBar.rating = data?.vote?.toFloat() ?: 0f
 
             Glide.with(requireActivity())
-                    .load(IMAGE_URL + data?.backDrop)
-                    .into(backdrop)
+                .load(IMAGE_URL + data?.backDrop)
+                .into(backdrop)
 
         }
     }
@@ -95,9 +95,19 @@ class DetailFragment : Fragment() {
 
     private fun setFavoriteMovie(favorite: Boolean?) {
         if (favorite == true) {
-            binding.favFloat.setImageDrawable(getDrawable(requireActivity(), R.drawable.ic_favorite_filled))
+            binding.favFloat.setImageDrawable(
+                getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_filled
+                )
+            )
         } else {
-            binding.favFloat.setImageDrawable(getDrawable(requireActivity(), R.drawable.ic_favorite_border))
+            binding.favFloat.setImageDrawable(
+                getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_border
+                )
+            )
         }
     }
 

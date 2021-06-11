@@ -27,7 +27,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         navController = findNavController(R.id.nav_host)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.favoriteFragment))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment,
+                R.id.searchFragment,
+                R.id.favoriteFragment
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         setBottomNavigation()
@@ -37,8 +43,8 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         if (binding?.bottomNav !== null) {
             NavigationUI.setupWithNavController(
-                    binding!!.bottomNav,
-                    navHost.navController
+                binding!!.bottomNav,
+                navHost.navController
             )
         }
     }

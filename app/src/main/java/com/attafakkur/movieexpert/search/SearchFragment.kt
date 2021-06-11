@@ -33,8 +33,8 @@ class SearchFragment : Fragment() {
     private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         searchBinding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root

@@ -8,7 +8,8 @@ import com.attafakkur.core.data.State
 import com.attafakkur.core.domain.model.Movie
 import com.attafakkur.core.domain.usecase.MovieUseCase
 
-class SearchViewModel @ViewModelInject constructor(private val movieUseCase: MovieUseCase) : ViewModel() {
+class SearchViewModel @ViewModelInject constructor(private val movieUseCase: MovieUseCase) :
+    ViewModel() {
     private var movies = MutableLiveData<State<List<Movie>>>()
     val movie: LiveData<State<List<Movie>>> get() = movies
 

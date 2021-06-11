@@ -29,8 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         homeBinding = HomeFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root

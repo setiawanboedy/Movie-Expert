@@ -19,13 +19,13 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "API_KEY", "\"a5b7b6baa4f0fe2efccccd5e3b6dc2d4\"")
         buildConfigField("String", "HOSTNAME", "\"api.themoviedb.org\"")
         buildConfigField("String", "DB", "\"favorite.db\"")
         buildConfigField("String", "PASSPHRASE", "\"movieexpert\"")
-        buildConfigField("String", "PIN_A", "\"sha256/UGwY2lttaRoHnGd1gpeydmov1LzioQpzYTywtNSJkAU=\"")
-        buildConfigField("String", "PIN_B", "\"sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=\"")
-        buildConfigField("String", "PIN_C", "\"sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=\"")
-        buildConfigField("String", "PIN_D", "\"sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=\"")
+        buildConfigField("String", "PIN_A", "\"sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=\"")
+        buildConfigField("String", "PIN_B", "\"sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=\"")
+        buildConfigField("String", "PIN_C", "\"sha256/++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=\"")
     }
 
     buildTypes {

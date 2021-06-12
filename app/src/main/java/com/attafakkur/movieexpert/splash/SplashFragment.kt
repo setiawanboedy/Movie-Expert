@@ -1,13 +1,11 @@
 package com.attafakkur.movieexpert.splash
 
 import android.animation.Animator
-import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.attafakkur.movieexpert.MainActivity
@@ -61,9 +59,21 @@ class SplashFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.hide()
-        (activity as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_nav)
-            ?.visibility = View.GONE
+        with((activity as MainActivity)){
+            supportActionBar?.hide()
+            findViewById<BottomNavigationView>(R.id.bottom_nav)
+                ?.visibility = View.GONE
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window.insetsController?.hide(WindowInsets.Type.statusBars())
+            }
+            else {
+                @Suppress("DEPRECATION")
+                window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            }
+        }
+
     }
 
 }

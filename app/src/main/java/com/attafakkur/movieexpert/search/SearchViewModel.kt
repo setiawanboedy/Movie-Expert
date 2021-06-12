@@ -16,4 +16,6 @@ class SearchViewModel @ViewModelInject constructor(private val movieUseCase: Mov
     suspend fun searchMovies(query: String) {
         movies.value = movieUseCase.searchMovies(query)
     }
+
+//    suspend fun insertMovie(movie: Movie) = movieUseCase.insertMovie(movie)
 }

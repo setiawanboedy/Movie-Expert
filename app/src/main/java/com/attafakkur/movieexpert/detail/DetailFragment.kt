@@ -11,10 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.attafakkur.core.data.State
 import com.attafakkur.core.domain.model.Movie
-import com.attafakkur.core.utils.Constants.IMAGE_URL
 import com.attafakkur.core.utils.hidePb
 import com.attafakkur.core.utils.showPb
 import com.attafakkur.core.utils.snack
+import com.attafakkur.movieexpert.BuildConfig.IMAGE_URL
 import com.attafakkur.movieexpert.MainActivity
 import com.attafakkur.movieexpert.R
 import com.attafakkur.movieexpert.databinding.DetailkFragmentBinding
@@ -27,14 +27,15 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
 
     private val viewModel: DetailViewModel by viewModels()
-    private lateinit var binding: DetailkFragmentBinding
+    private var _detailFragmentBinding: DetailkFragmentBinding? = null
+    private val binding get() = _detailFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DetailkFragmentBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    ): View? {
+        _detailFragmentBinding = DetailkFragmentBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,60 +51,59 @@ class DetailFragment : Fragment() {
             run {
                 when (detail) {
                     is State.Loading -> {
-                        binding.pbDetail.showPb()
+                        binding?.pbDetail?.showPb()
                         showNav(true)
                     }
                     is State.Success -> {
                         setFavoriteMovie(detail.data?.isFavorite)
                         populateDataDetail(detail.data)
-                        binding.pbDetail.hidePb()
+                        binding?.pbDetail?.hidePb()
                         showNav(false)
-                        binding.favFloat.setOnClickListener {
+                        binding?.favFloat?.setOnClickListener {
                             detail.data?.let { it1 -> viewModel.setFavoriteMovie(it1) }
                             setFavoriteMovie(detail.data?.isFavorite)
 
                         }
                     }
                     is State.Error -> {
-                        detail.message?.let { binding.root.snack(it) }
-                        binding.pbDetail.hidePb()
+                        detail.message?.let { binding?.root?.snack(it) }
+                        binding?.pbDetail?.hidePb()
                         showNav(false)
                     }
-                    else -> binding.pbDetail.hidePb()
+                    else -> binding?.pbDetail?.hidePb()
                 }
             }
         })
     }
 
     private fun populateDataDetail(data: Movie?) {
-        with(binding) {
-            collaps.title = data?.title
-            tvOverview.text = data?.overview
-            ratingS.text = resources.getString(R.string.rating_d, data?.vote)
-            ratingBar.rating = data?.vote?.toFloat() ?: 0f
+            binding?.collaps?.title = data?.title
+            binding?.tvOverview?.text = data?.overview
+            binding?.ratingS?.text = resources.getString(R.string.rating_d, data?.vote)
+            binding?.ratingBar?.rating = data?.vote?.toFloat() ?: 0f
 
-            Glide.with(requireActivity())
-                .load(IMAGE_URL + data?.backDrop)
-                .into(backdrop)
-
-        }
+            binding?.backdrop?.let {
+                Glide.with(requireActivity())
+                    .load(IMAGE_URL + data?.backDrop)
+                    .into(it)
+            }
     }
 
     private fun showNav(isVisible: Boolean) {
-        binding.appBar.isVisible = !isVisible
-        binding.scrollNst.isVisible = !isVisible
+        binding?.appBar?.isVisible = !isVisible
+        binding?.scrollNst?.isVisible = !isVisible
     }
 
     private fun setFavoriteMovie(favorite: Boolean?) {
         if (favorite == true) {
-            binding.favFloat.setImageDrawable(
+            binding?.favFloat?.setImageDrawable(
                 getDrawable(
                     requireActivity(),
                     R.drawable.ic_favorite_filled
                 )
             )
         } else {
-            binding.favFloat.setImageDrawable(
+            binding?.favFloat?.setImageDrawable(
                 getDrawable(
                     requireActivity(),
                     R.drawable.ic_favorite_border

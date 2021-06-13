@@ -12,6 +12,7 @@ import com.attafakkur.core.utils.Constants.IMAGE_URL
 import com.attafakkur.core.utils.OnItemClickCallback
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.util.*
 
 class MovieAdapter(private val onItemClickCallback: OnItemClickCallback) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -26,7 +27,7 @@ class MovieAdapter(private val onItemClickCallback: OnItemClickCallback) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false))
 
     override fun onBindViewHolder(holder: MovieAdapter.ViewHolder, position: Int) {
         val data = list[position]
@@ -39,13 +40,13 @@ class MovieAdapter(private val onItemClickCallback: OnItemClickCallback) :
         fun bind(data: Movie) {
             with(binding) {
                 val apply = RequestOptions()
-                        .override(poster.width, poster.height)
+                    .override(poster.width, poster.height)
 
                 Glide.with(itemView.context)
-                        .load(IMAGE_URL + data.poster)
-                        .apply(apply)
-                        .error(R.drawable.ic_action_err)
-                        .into(poster)
+                    .load(IMAGE_URL + data.poster)
+                    .apply(apply)
+                    .error(R.drawable.ic_action_err)
+                    .into(poster)
 
                 title.text = data.title
                 release.text = data.release

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.attafakkur.favorite">
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_favorite">
+        dist:title="Favorite">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>

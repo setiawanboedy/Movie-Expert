@@ -19,7 +19,7 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
 
-        val certPinner = CertificatePinner.Builder()
+        val certificate = CertificatePinner.Builder()
             .add(
                 BuildConfig.HOSTNAME,
                 BuildConfig.PIN_A,
@@ -28,10 +28,10 @@ class NetworkModule {
             ).build()
 
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(HttpLoggingInterceptor())
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
-            .certificatePinner(certPinner)
+            .certificatePinner(certificate)
             .build()
     }
 

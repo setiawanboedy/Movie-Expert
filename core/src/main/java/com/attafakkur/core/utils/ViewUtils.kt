@@ -2,6 +2,7 @@ package com.attafakkur.core.utils
 
 import android.view.View
 import android.widget.ProgressBar
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 
@@ -23,4 +24,12 @@ fun ShimmerFrameLayout.hidePb() {
 
 fun View.snack(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()
+}
+
+fun refresh(swipeRefreshLayout: SwipeRefreshLayout?, listener: (Any) -> Unit) {
+    swipeRefreshLayout?.setOnRefreshListener {
+        listener.also(listener)
+
+        swipeRefreshLayout.isRefreshing = false
+    }
 }

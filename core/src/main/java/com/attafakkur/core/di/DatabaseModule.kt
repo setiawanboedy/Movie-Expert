@@ -3,6 +3,7 @@ package com.attafakkur.core.di
 import android.content.Context
 import androidx.room.Room
 import com.attafakkur.core.BuildConfig
+import com.attafakkur.core.BuildConfig.PASSPHRASE
 import com.attafakkur.core.data.source.local.room.MovieDao
 import com.attafakkur.core.data.source.local.room.MovieDatabase
 import dagger.Module
@@ -22,7 +23,7 @@ class DatabaseModule {
     fun provideDatabase(
         @ApplicationContext context: Context
     ): MovieDatabase {
-        val passPhrase: ByteArray = SQLiteDatabase.getBytes(BuildConfig.PASSPHRASE.toCharArray())
+        val passPhrase: ByteArray = SQLiteDatabase.getBytes(PASSPHRASE.toCharArray())
         val factory = SupportFactory(passPhrase)
 
         return Room.databaseBuilder(

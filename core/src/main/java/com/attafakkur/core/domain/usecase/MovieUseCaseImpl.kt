@@ -4,7 +4,8 @@ import com.attafakkur.core.domain.model.Movie
 import com.attafakkur.core.domain.repository.MovieRepository
 import javax.inject.Inject
 
-class MovieUseCaseImpl @Inject constructor(private val movieRepository: MovieRepository) : MovieUseCase {
+class MovieUseCaseImpl @Inject constructor(private val movieRepository: MovieRepository) :
+    MovieUseCase {
     override fun getMovies() = movieRepository.getMovies()
 
     override fun getFavoriteMovies() = movieRepository.getFavoriteMovies()

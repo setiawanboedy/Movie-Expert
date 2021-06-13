@@ -11,6 +11,7 @@ interface MovieUseCase {
     fun setFavoriteMovie(movie: Movie)
 
     suspend fun searchMovies(query: String): State<List<Movie>>
-//    suspend fun insertMovie(movie: Movie)
+
+    //    suspend fun insertMovie(movie: Movie)
     fun deleteMovies()
 }

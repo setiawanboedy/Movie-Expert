@@ -17,13 +17,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private var bindingMain: ActivityMainBinding? = null
-    private val binding get() = bindingMain
+    private var activityMainBinding: ActivityMainBinding? = null
+    private val binding get() = activityMainBinding
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingMain = ActivityMainBinding.inflate(layoutInflater)
+        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         navController = findNavController(R.id.nav_host)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        activityMainBinding = null
         super.onDestroy()
-        bindingMain = null
     }
 }

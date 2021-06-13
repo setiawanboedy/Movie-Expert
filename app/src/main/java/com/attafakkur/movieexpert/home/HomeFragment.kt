@@ -3,9 +3,7 @@ package com.attafakkur.movieexpert.home
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,33 +12,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.attafakkur.core.data.State
 import com.attafakkur.core.domain.model.Movie
 import com.attafakkur.core.ui.MovieAdapter
-import com.attafakkur.core.utils.OnItemClickCallback
-import com.attafakkur.core.utils.hidePb
-import com.attafakkur.core.utils.showPb
-import com.attafakkur.core.utils.snack
+import com.attafakkur.core.utils.*
 import com.attafakkur.movieexpert.MainActivity
 import com.attafakkur.movieexpert.R
 import com.attafakkur.movieexpert.databinding.HomeFragmentBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private var homeBinding: HomeFragmentBinding? = null
-    private val binding get() = homeBinding as HomeFragmentBinding
-    private lateinit var movieAdapter: MovieAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        homeBinding = HomeFragmentBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    private val binding by viewBinding(HomeFragmentBinding::bind)
+    private var movieAdapter: MovieAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,13 +37,15 @@ class HomeFragment : Fragment() {
                 val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.id)
                 findNavController().navigate(action)
             }
-
         })
 
-        populateMovies()
+        populateMovies(binding)
+        refresh(binding.homeRefresh) {
+            populateMovies(binding)
+        }
     }
 
-    private fun populateMovies() {
+    private fun populateMovies(binding: HomeFragmentBinding) {
         viewModel.movie.observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
                 when (movie) {
@@ -85,17 +74,12 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-        with(binding.rvMovie) {
-            layoutManager = GridLayoutManager(requireActivity(), 2)
-            adapter = movieAdapter
-            setHasFixedSize(true)
-        }
+        binding.rvMovie.layoutManager = GridLayoutManager(requireActivity(), 2)
+        binding.rvMovie.adapter = movieAdapter
+        binding.rvMovie.setHasFixedSize(true)
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        homeBinding = null
-    }
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.show()
@@ -103,6 +87,11 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_nav)
             ?.visibility = View.VISIBLE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        movieAdapter = null
     }
 
 }

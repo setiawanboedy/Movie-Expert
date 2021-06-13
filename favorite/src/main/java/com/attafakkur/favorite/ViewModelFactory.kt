@@ -8,13 +8,13 @@ import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor(private val movieUseCase: MovieUseCase) :
-        ViewModelProvider.NewInstanceFactory() {
+    ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            when {
-                modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
-                    FavoriteViewModel(movieUseCase) as T
-                }
-                else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
+        when {
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(movieUseCase) as T
             }
+            else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
+        }
 }

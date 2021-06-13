@@ -10,7 +10,7 @@ class AppExecutors @VisibleForTesting constructor(private val diskIO: Executor) 
 
     @Inject
     constructor() : this(
-            Executors.newSingleThreadExecutor()
+        Executors.newSingleThreadExecutor()
     )
 
     fun diskIO(): Executor = diskIO

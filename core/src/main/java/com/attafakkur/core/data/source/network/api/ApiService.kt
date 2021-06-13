@@ -14,11 +14,11 @@ interface ApiService {
 
     @GET("movie/{movie_id}?api_key=${BuildConfig.API_KEY}")
     suspend fun getMovieDetail(
-            @Path("movie_id") movie_id: String
+        @Path("movie_id") movie_id: String
     ): MovieResponse
 
     @GET("search/movie?api_key=${BuildConfig.API_KEY}")
     suspend fun getSearchMovieDb(
-            @Query("query") search: String
+        @Query("query") search: String
     ): MoviesResponse
 }

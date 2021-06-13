@@ -19,33 +19,33 @@ import javax.inject.Singleton
 @Suppress("UNCHECKED_CAST")
 @Singleton
 class MovieRepositoryImpl @Inject constructor(
-        private val remoteDataSource: RemoteDataSource,
-        private val localDataSource: LocalDataSource,
-        private val appExecutors: AppExecutors
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
 ) : MovieRepository {
     override fun getMovies(): Flow<State<List<Movie>>> =
-            object : NetworkResourceBound<List<Movie>, List<MovieResponse>>() {
-                override fun loadFromDB(): Flow<List<Movie>> {
-                    return localDataSource.getAllMovies().map {
-                        MovieMapper.mapEntitiesToDomain(it)
-                    }
+        object : NetworkResourceBound<List<Movie>, List<MovieResponse>>() {
+            override fun loadFromDB(): Flow<List<Movie>> {
+                return localDataSource.getAllMovies().map {
+                    MovieMapper.mapEntitiesToDomain(it)
                 }
+            }
 
-                override fun shouldFetch(data: List<Movie>?): Boolean {
+            override fun shouldFetch(data: List<Movie>?): Boolean {
 
-                    Log.d("movie", "repository : $data")
-                    return data?.isEmpty() == true || data == null
-                }
+                Log.d("movie", "repository : $data")
+                return data?.isEmpty() == true || data == null
+            }
 
-                override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
-                        remoteDataSource.getAllMovies()
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
+                remoteDataSource.getAllMovies()
 
-                override suspend fun saveCallResult(data: List<MovieResponse>) {
-                    val movieList = MovieMapper.mapResponsesToEntities(data)
-                    localDataSource.insertAllMovies(movieList)
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
+                val movieList = MovieMapper.mapResponsesToEntities(data)
+                localDataSource.insertAllMovies(movieList)
 
-                }
-            }.asFlow() as Flow<State<List<Movie>>>
+            }
+        }.asFlow() as Flow<State<List<Movie>>>
 
 
     override fun getFavoriteMovies(): Flow<List<Movie>> {
@@ -55,29 +55,29 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getDetailMovie(id: Int): Flow<State<Movie>> =
-            object : NetworkResourceBound<Movie, MovieResponse>() {
-                override fun loadFromDB(): Flow<Movie?>? {
-                    return localDataSource.getMovieById(id)?.map { value: MoviesEntity? ->
-                        if (value == null) {
-                            return@map null
-                        } else {
-                            return@map MovieMapper.mapEntityToDomain(value)
-                        }
+        object : NetworkResourceBound<Movie, MovieResponse>() {
+            override fun loadFromDB(): Flow<Movie?>? {
+                return localDataSource.getMovieById(id)?.map { value: MoviesEntity? ->
+                    if (value == null) {
+                        return@map null
+                    } else {
+                        return@map MovieMapper.mapEntityToDomain(value)
                     }
                 }
+            }
 
-                override fun shouldFetch(data: Movie?): Boolean {
-                    return data?.overview == "" || data == null
-                }
+            override fun shouldFetch(data: Movie?): Boolean {
+                return data?.overview == "" || data == null
+            }
 
-                override suspend fun createCall(): Flow<ApiResponse<MovieResponse>> =
-                        remoteDataSource.getDetailMovie(id)
+            override suspend fun createCall(): Flow<ApiResponse<MovieResponse>> =
+                remoteDataSource.getDetailMovie(id)
 
-                override suspend fun saveCallResult(data: MovieResponse) {
-                    val movieDetail = MovieMapper.mapResponseToEntity(data)
-                    localDataSource.insertMovie(movieDetail)
-                }
-            }.asFlow() as Flow<State<Movie>>
+            override suspend fun saveCallResult(data: MovieResponse) {
+                val movieDetail = MovieMapper.mapResponseToEntity(data)
+                localDataSource.insertMovie(movieDetail)
+            }
+        }.asFlow() as Flow<State<Movie>>
 
     override fun setFavoriteMovie(movie: Movie) {
         val movieEntity = MovieMapper.mapDomainToEntity(movie)

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image">gambar</string>
+    <string name="title">judul</string>
+    <string name="release">rilis</string>
+    <string name="rating_d">Rating: %s</string>
+</resources>

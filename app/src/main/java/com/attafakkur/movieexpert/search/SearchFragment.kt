@@ -5,7 +5,9 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,24 +24,16 @@ import com.attafakkur.core.utils.showPb
 import com.attafakkur.core.utils.snack
 import com.attafakkur.movieexpert.R
 import com.attafakkur.movieexpert.databinding.SearchFragmentBinding
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private val viewModel: SearchViewModel by viewModels()
-    private var searchBinding: SearchFragmentBinding? = null
-    private val binding get() = searchBinding as SearchFragmentBinding
-    private lateinit var movieAdapter: MovieAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        searchBinding = SearchFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val binding by viewBinding(SearchFragmentBinding::bind)
+    private var movieAdapter: MovieAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +41,7 @@ class SearchFragment : Fragment() {
         movieItemClick()
         populateSearchMovie()
 
-        binding.splashLottie.addAnimatorListener(object : Animator.AnimatorListener{
+        binding.splashLottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {}
 
             override fun onAnimationEnd(animation: Animator?) {}
@@ -79,7 +73,6 @@ class SearchFragment : Fragment() {
                 when (movie) {
                     is State.Loading -> binding.pbSearch.showPb()
                     is State.Success -> {
-                        Log.e("search", movie.data.toString())
                         binding.pbSearch.hidePb()
                         binding.rvSearch.adapter.let { adapter ->
                             when (adapter) {
@@ -97,11 +90,11 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-        with(binding.rvSearch) {
-            layoutManager = GridLayoutManager(requireActivity(), 2)
-            adapter = movieAdapter
-            setHasFixedSize(true)
-        }
+
+        binding.rvSearch.layoutManager = GridLayoutManager(requireActivity(), 2)
+        binding.rvSearch.adapter = movieAdapter
+        binding.rvSearch.setHasFixedSize(true)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -142,9 +135,9 @@ class SearchFragment : Fragment() {
         binding.rvSearch.isVisible = !state
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        searchBinding = null
+    override fun onDestroyView() {
+        super.onDestroyView()
+        movieAdapter = null
     }
 
 }

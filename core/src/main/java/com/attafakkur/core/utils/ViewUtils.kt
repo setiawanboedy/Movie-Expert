@@ -2,6 +2,7 @@ package com.attafakkur.core.utils
 
 import android.view.View
 import android.widget.ProgressBar
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 
 fun ProgressBar.showPb() {
@@ -9,6 +10,14 @@ fun ProgressBar.showPb() {
 }
 
 fun ProgressBar.hidePb() {
+    visibility = View.GONE
+}
+
+fun ShimmerFrameLayout.showPb() {
+    visibility = View.VISIBLE
+}
+
+fun ShimmerFrameLayout.hidePb() {
     visibility = View.GONE
 }
 

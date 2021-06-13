@@ -36,12 +36,12 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding?.splashTextview?.visibility = View.GONE
-        binding?.splashLottie?.addAnimatorListener(object : Animator.AnimatorListener {
+        binding?.tvSplash?.visibility = View.GONE
+        binding?.lotteAnim?.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {}
 
             override fun onAnimationEnd(animation: Animator?) {
-                binding?.splashTextview?.visibility = View.VISIBLE
+                binding?.tvSplash?.visibility = View.VISIBLE
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)

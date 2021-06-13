@@ -31,15 +31,15 @@ class FavoriteFragment : Fragment() {
     }
 
     private var favBinding: FavoriteFragmentBinding? = null
-    private val binding get() = favBinding as FavoriteFragmentBinding
+    private val binding get() = favBinding
     private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         favBinding = FavoriteFragmentBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onAttach(context: Context) {
@@ -58,32 +58,32 @@ class FavoriteFragment : Fragment() {
 
         movieItemClick()
         populateFavoriteMovie()
-        binding.deleteFloat.setOnClickListener { deleteAllFav() }
+        binding?.deleteFloat?.setOnClickListener { deleteAllFav() }
     }
 
     private fun populateFavoriteMovie() {
         viewModel.favMovies.observe(viewLifecycleOwner, { fav ->
             if (fav.isEmpty()) {
-                binding.noFav.isVisible = true
-                binding.rvFav.adapter.let { adapter ->
+                binding?.noFav?.isVisible = true
+                binding?.rvFav?.adapter.let { adapter ->
                     when (adapter) {
                         is MovieAdapter -> adapter.setData(fav)
                     }
                 }
             } else {
-                binding.noFav.isVisible = false
-                binding.rvFav.adapter.let { adapter ->
+                binding?.noFav?.isVisible = false
+                binding?.rvFav?.adapter.let { adapter ->
                     when (adapter) {
                         is MovieAdapter -> adapter.setData(fav)
                     }
                 }
             }
         })
-        with(binding.rvFav) {
-            layoutManager = GridLayoutManager(requireActivity(), 2)
-            adapter = movieAdapter
-            setHasFixedSize(true)
-        }
+
+            binding?.rvFav?.layoutManager = GridLayoutManager(requireActivity(), 2)
+            binding?.rvFav?.adapter = movieAdapter
+            binding?.rvFav?.setHasFixedSize(true)
+
     }
 
     private fun movieItemClick() {

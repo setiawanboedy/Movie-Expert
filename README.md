@@ -16,6 +16,7 @@
 - Get All the Movies
 - Search the Movies
 - Favorited Movies
+- Delete All Movies
 
 ## Tech Stack
 - MVVM (Model-View-ViewModel) Architecture Pattern

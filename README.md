@@ -1,8 +1,8 @@
 <h1 align="center">
-  Dicoding MADE : Movie Expert
+  Movie Expert
 </h1>
 <p align="center">
-  Menjadi Android Developer Expert in Dicoding Course.
+  Belajar Menjadi Android Developer Expert.
 </p>
 <p align="center">
   <a href="http://developer.android.com/index.html"><img alt="Platform" src="https://img.shields.io/badge/platform-Android-green.svg"></a>
